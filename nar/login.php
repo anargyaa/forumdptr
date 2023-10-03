@@ -45,16 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							header("location: index.php");
 						} else {
 							$login_err = "Email atau Password salah";	
-							header("location: login3.php");
 						}
 					}
 				} else {
 					$login_err = "Email atau Password salah";
-					header("location: login2.php");
 				}
 			} else {
 				echo "ERROR 505";
-				header("location: login1.php");
 			}
 			mysqli_stmt_close($stmt);
 		}
