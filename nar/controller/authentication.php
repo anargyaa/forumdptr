@@ -1,6 +1,6 @@
 <?php
 
-include 'controller/koneksion.php';
+include 'koneksion.php';
 session_start();
 
 if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
@@ -42,19 +42,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$_SESSION['id_user'] = $id_user;
 							$_SESSION['email'] = $email;
 
-							header("location: index.php");
+							header("location: ../index.php");
 						} else {
 							$login_err = "Email atau Password salah";	
-							header("location: login3.php");
+							header("location: ../login.php");
 						}
 					}
 				} else {
 					$login_err = "Email atau Password salah";
-					header("location: login2.php");
+					header("location: ../login.php");
 				}
 			} else {
 				echo "ERROR 505";
-				header("location: login1.php");
+				header("location: ../login.php");
 			}
 			mysqli_stmt_close($stmt);
 		}
@@ -64,29 +64,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-	<?php 
-        if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
-    ?>
-
-	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-		<label>Email</label>
-        <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-        <span class="invalid-feedback"><?php echo $email_err; ?></span>
-        <label>Password</label>
-        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-        <span class="invalid-feedback"><?php echo $password_err; ?></span>
-		<input type="submit" name="in" value="Login">
-	</form>
-</body>
-</html>
